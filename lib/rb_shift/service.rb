@@ -11,6 +11,14 @@ module RbShift
       @_routes
     end
 
+    def filter_routes_by_labels(update = false, labels: {})
+      routes = routes(update)
+      routes.select do |_, value|
+        (labels.to_a - value.metadata.labels.to_a).empty?
+      end
+
+    end
+
     def create_route(name, hostname, termination = 'edge', **opts)
       log.info "Creating route #{name} #{hostname} for service #{self.name}"
       if termination

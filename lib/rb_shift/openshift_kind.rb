@@ -49,6 +49,10 @@ module RbShift
       execute "patch #{self.class.class_name} #{name} -p #{patch.shellescape}"
     end
 
+    def change_label(label)
+      @obj[:metadata][:labels].merge!(label)
+    end
+
     def execute(command, **opts)
       parent.execute(command, **opts) if parent.respond_to? :execute
     end

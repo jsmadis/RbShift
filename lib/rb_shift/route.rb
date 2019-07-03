@@ -13,5 +13,10 @@ module RbShift
       protocol    = termination ? 'https' : 'http'
       "#{protocol}://#{host.chomp '/'}"
     end
+
+    def change_service(name, port)
+      @obj[:spec][:to][:name] = name
+      @obj[:spec][:port][:targetPort] = port
+    end
   end
 end
